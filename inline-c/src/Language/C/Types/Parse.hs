@@ -166,7 +166,7 @@ cCParserContext typeNames = CParserContext
 -- referring to Haskell variables, and thus we need to parse Haskell
 -- identifiers in certain positions.
 type CParser i m =
-  ( Monad m
+  ( MonadFail m
   , Functor m
   , Applicative m
   , MonadPlus m

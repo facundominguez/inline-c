@@ -523,7 +523,7 @@ parseTypedC antiQs = do
     -- The @m@ is polymorphic because we use this both for the plain
     -- parser and the StateT parser we use above.  We only need 'fail'.
     purgeHaskellIdentifiers
-      :: forall n. (Applicative n, Monad n)
+      :: forall n. (Applicative n, MonadFail n)
       => C.Type HaskellIdentifier -> n (C.Type C.CIdentifier)
     purgeHaskellIdentifiers cTy = for cTy $ \hsIdent -> do
       let hsIdentS = unHaskellIdentifier hsIdent
@@ -539,9 +539,9 @@ quoteCode
   -> TH.QuasiQuoter
 quoteCode p = TH.QuasiQuoter
   { TH.quoteExp = p
-  , TH.quotePat = fail "inline-c: quotePat not implemented (quoteCode)"
-  , TH.quoteType = fail "inline-c: quoteType not implemented (quoteCode)"
-  , TH.quoteDec = fail "inline-c: quoteDec not implemented (quoteCode)"
+  , TH.quotePat = error "inline-c: quotePat not implemented (quoteCode)"
+  , TH.quoteType = error "inline-c: quoteType not implemented (quoteCode)"
+  , TH.quoteDec = error "inline-c: quoteDec not implemented (quoteCode)"
   }
 
 genericQuote
